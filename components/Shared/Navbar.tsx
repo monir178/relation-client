@@ -41,7 +41,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-16 left-0 w-full bg-[#4a0000] text-white flex flex-col items-center gap-4 py-6 shadow-lg">
+            className="absolute top-12 left-0 w-full bg-[#4a0000] text-white flex flex-col items-center gap-4 py-6 shadow-lg">
             <ShoppingBag size={24} />
             <User size={24} />
             <Search size={24} />
