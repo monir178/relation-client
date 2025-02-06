@@ -51,7 +51,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Branding */}
-        <div className="px-6 py-6 text-center bg-black text-white uppercase w-full flex justify-center items-center">
+        <div className="px-6 py-6 text-center bg-black text-white uppercase w-full flex justify-center items-center rounded-lg">
           <p className="text-3xl md:text-5xl lg:text-7xl font-manrope font-bold tracking-widest">
             R E L A T I O N
           </p>

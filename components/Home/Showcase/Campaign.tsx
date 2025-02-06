@@ -4,7 +4,7 @@ import Image from "next/image"
 
 const Campaign = () => {
   return (
-    <div className="w-full mx-auto flex flex-col sm:flex-row py-4 px-2">
+    <div className="w-full mx-auto flex flex-col sm:flex-row">
       {/* Image Section */}
       <div className="w-full sm:w-1/2 order-1 sm:order-none">
         <Image src="/camp.jpg" alt="Campaign Image" width={1000} height={800} className="w-full h-auto object-cover" />

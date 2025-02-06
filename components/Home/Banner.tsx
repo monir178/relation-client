@@ -3,7 +3,7 @@ import React from "react";
 const Banner = () => {
   return (
     <div
-      className="font-manrope relative 2xl:top-[70px] h-screen w-full bg-cover bg-center flex flex-col items-center justify-center text-white"
+      className="font-manrope relative 2xl:top-[60px] h-screen w-full bg-cover bg-center flex flex-col items-center justify-center text-white"
       style={{ backgroundImage: "url('/banner1.jpg')" }}
     >
       <div className="w-full text-center mt-52">

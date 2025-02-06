@@ -5,16 +5,17 @@ import { Heart } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import Filter from "./Filter"
 
 // Sample product data - in a real app this would come from an API or database
 const products = [
   { id: 1, name: "Burgundy Leather Loafer", price: "$295", imageUrl: "/bag.jpg" },
   { id: 2, name: "Classic Black Loafer", price: "$275", imageUrl: "/bag.jpg" },
-  { id: 3, name: "Olive Penny Loafer", price: "$285", imageUrl: "/bag.jpg" },
+  { id: 3, name: "Olive Penny Loafer", price: "$285", imageUrl: "/ts1.jpg" },
   { id: 4, name: "Cream Canvas Sneaker", price: "$195", imageUrl: "/bag.jpg" },
   { id: 5, name: "Navy Blue Derby", price: "$310", imageUrl: "/bag.jpg" },
   { id: 6, name: "Brown Chelsea Boot", price: "$350", imageUrl: "/bag.jpg" },
-  { id: 7, name: "Suede Desert Boot", price: "$275", imageUrl: "/bag.jpg" },
+  { id: 7, name: "Suede Desert Boot", price: "$275", imageUrl: "/ts1.jpg" },
   { id: 8, name: "Black Oxford Shoe", price: "$325", imageUrl: "/bag.jpg" },
   { id: 9, name: "Tan Brogue Shoe", price: "$290", imageUrl: "/bag.jpg" },
   { id: 10, name: "Gray Running Sneaker", price: "$180", imageUrl: "/bag.jpg" },
@@ -27,19 +28,33 @@ const products = [
   { id: 17, name: "Blue Leather Slip-On", price: "$280", imageUrl: "/bag.jpg" },
   { id: 18, name: "Camel Suede Loafer", price: "$295", imageUrl: "/bag.jpg" },
   { id: 19, name: "Black Monk Strap Shoe", price: "$320", imageUrl: "/bag.jpg" },
-  { id: 20, name: "White Espadrille", price: "$200", imageUrl: "/bag.jpg" },
+  { id: 20, name: "White Espadrille", price: "$200", imageUrl: "/ts1.jpg" },
 ]
 
 export default function Category() {
   const [favorites, setFavorites] = useState<number[]>([])
+  
 
   const toggleFavorite = (productId: number) => {
     setFavorites((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]))
   }
 
   return (
-    <div className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4 py-20">
       <h1 className="text-3xl font-bold mb-8">Featured Collection</h1>
+
+      
+
+      <Filter onCategoryChange={function (): void {
+              throw new Error("Function not implemented.")
+          } } onLineChange={function (): void {
+              throw new Error("Function not implemented.")
+          } } onSortChange={function (): void {
+              throw new Error("Function not implemented.")
+          } } selectedSort={""}/>
+
+
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product) => (
