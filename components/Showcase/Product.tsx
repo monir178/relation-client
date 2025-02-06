@@ -1,57 +1,95 @@
-'use client'
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import Image from "next/image";
-import "swiper/css";
-import "swiper/css/bundle"; // Ensures all styles are applied
-import { FreeMode, Pagination } from "swiper/modules";
+"use client"
+
+import Image from "next/image"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination } from "swiper/modules"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
 
 const products = [
-  { image: '/ts1.jpg', price: 'US$000', name: 'Cashmere & Wool Coat' },
-  { image: '/ts2.jpg', price: 'US$000', name: 'Printed Cotton Pants' },
-  { image: '/ts3.jpg', price: 'US$000', name: 'Suede Backpack' },
-  { image: '/ts4.jpg', price: 'US$000', name: 'Elasticized Sneakers' },
-  { image: '/ts3.jpg', price: 'US$000', name: 'Suede Backpack' },
-  { image: '/ts4.jpg', price: 'US$000', name: 'Elasticized Sneakers' },
-  { image: '/ts3.jpg', price: 'US$000', name: 'Suede Backpack' },
-  { image: '/ts4.jpg', price: 'US$000', name: 'Elasticized Sneakers' },
-];
+  {
+    image: "/ts1.jpg",
+    name: "Single-breasted cashmere and wool coat",
+    colors: ["#000000", "#2B2B2B"],
+  },
+  {
+    image: "/ts2.jpg",
+    name: "Printed cotton gabardine pants",
+    colors: ["#2B2B2B"],
+  },
+  {
+    image: "/ts3.jpg",
+    name: "Suede backpack",
+    colors: ["#8B4513"],
+  },
+  {
+    image: "/ts4.jpg",
+    name: "Collapse Re-Nylon and suede elasticized sneakers",
+    colors: ["#F5F5DC", "#000000", "#8B4513", "#4A4A4A"],
+  },
+  {
+    image: "/ts3.jpg",
+    name: "Suede backpack",
+    colors: ["#8B4513"],
+  },
+  {
+    image: "/ts4.jpg",
+    name: "Elasticized sneakers",
+    colors: ["#F5F5DC", "#000000"],
+  },
+]
 
-const Product = () => {
+export default function ProductCarousel() {
   return (
-    <div className="px-4 py-2">
+    <div className="w-full">
       <Swiper
-        slidesPerView={1}
-        spaceBetween={15}
-        freeMode={true}
+        modules={[Navigation, Pagination]}
+        navigation
         pagination={{ clickable: true }}
-        modules={[FreeMode, Pagination]}
+        spaceBetween={20}
+        slidesPerView={1}
         breakpoints={{
-          480: { slidesPerView: 1 },
-          640: { slidesPerView: 2, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 30 }
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+          1280: { slidesPerView: 4 },
         }}
-       
+        className="!px-4 !py-8 sm:!px-6"
       >
         {products.map((product, index) => (
-          <SwiperSlide key={index} className="w-full">
-            <div className="relative  h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] group">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-cover rounded-3xl"
-              />
-              <div className="absolute bottom-0 left-0 right-0 px-4 py-2 rounded-2xl bg-black/50 text-white text-center">
-                <span className="block text-sm sm:text-base font-medium">{product.name}</span>
-                <span className="text-xs sm:text-sm">{product.price}</span>
+          <SwiperSlide key={index}>
+            <div className="group cursor-pointer">
+              <div className="relative aspect-[3/4] mb-4 bg-[#F8F8F8]">
+                <Image
+                  src={product.image || "/placeholder.svg"}
+                  alt={product.name}
+                  fill
+                  priority={index === 0}
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-sm font-normal text-gray-900 leading-tight">{product.name}</h3>
+                <div className="flex gap-1">
+                  {product.colors.map((color, colorIndex) => (
+                    <div
+                      key={colorIndex}
+                      className="w-3 h-3 rounded-full border border-gray-200"
+                      style={{ backgroundColor: color }}
+                    />
+                  ))}
+                  {product.colors.length > 3 && (
+                    <span className="text-xs text-gray-500 ml-1">+{product.colors.length - 3}</span>
+                  )}
+                </div>
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
     </div>
-  );
-};
+  )
+}
 
-export default Product;

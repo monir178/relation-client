@@ -1,46 +1,38 @@
-import Image from "next/image";
-import React from "react";
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
 
-const NewArrivals = () => {
-  return (
-    <div className="w-full mx-auto flex flex-col md:flex-row min-h-[80vh] px-2">
-      <div className="w-full md:w-1/2 relative h-[400px] md:h-auto">
-        <div className="relative w-full h-full">
-          <Image
-            src="/new1.jpg"
-            layout="fill"
-            objectFit="cover"
-            alt="New Arrivals for Her"
-            className="object-left-top"
-          />
-        </div>
-        <div className="absolute bottom-8 left-0 right-0 z-10 text-center text-white">
-          <h2 className="text-3xl font-semibold">New Arrivals for Her</h2>
-          <button className="mt-4 px-6 py-2 border border-white text-white rounded-md hover:bg-white hover:text-black transition">
-            Discover
-          </button>
-        </div>
-      </div>
+interface ArrivalProps {
+  src: string
+  alt: string
+  title: string
+}
 
-      <div className="w-full md:w-1/2 relative h-[400px] md:h-auto">
-        <div className="relative w-full h-full">
-          <Image
-            src="/ts3.jpg"
-            layout="fill"
-            objectFit="cover"
-            alt="New Arrivals for Him"
-            className="object-left-top"
-          />
-        </div>
-        <div className="absolute bottom-8 left-0 right-0 z-10 text-center text-white">
-          <h2 className="text-3xl font-semibold">New Arrivals for Him</h2>
-          <button className="mt-4 px-6 py-2 border border-white text-white rounded-md hover:bg-white hover:text-black transition">
-            Discover
-          </button>
-        </div>
+const Arrival = ({ src, alt, title }: ArrivalProps) => (
+  <div className="relative w-full h-[50vh] md:h-[70vh] lg:h-[80vh]">
+    <Image src={src || "/placeholder.svg"} alt={alt} fill className="object-cover" sizes="100vw" priority />
+    <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+      <div className="text-center mt-20 space-y-5">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white ">{title}</h2>
+        <Button
+          variant="outline"
+          size="lg"
+          className="bg-transparent text-white border-white hover:bg-white hover:text-black transition-colors duration-300"
+        >
+          Discover
+        </Button>
       </div>
     </div>
-  );
-};
+  </div>
+)
 
-export default NewArrivals;
+export default function NewArrivals() {
+  return (
+    <section className="w-full">
+      <div className="grid md:grid-cols-2">
+        <Arrival src="/new1.jpg" alt="New Arrivals for Her" title="New Arrivals for Her" />
+        <Arrival src="/ts3.jpg" alt="New Arrivals for Him" title="New Arrivals for Him" />
+      </div>
+    </section>
+  )
+}
+

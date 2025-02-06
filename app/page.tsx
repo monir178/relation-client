@@ -1,5 +1,4 @@
 import Banner from "@/components/Banner";
-import Footer from "@/components/Shared/Footer";
 import Campaign from "@/components/Showcase/Campaign";
 import Carousel from "@/components/Showcase/Carousel";
 import NewArrivals from "@/components/Showcase/NewArraival";
@@ -13,7 +12,7 @@ export default function Home() {
       <NewArrivals/>
       <Campaign/>
       <Product/>
-      <Footer/>
+   
     </div>
   );
 }
