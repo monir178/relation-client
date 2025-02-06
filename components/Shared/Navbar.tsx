@@ -13,7 +13,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed z-50 top-0 w-full bg-[#4a0000] text-white flex justify-between items-center px-6 py-3 font-manrope">
+    <div className="fixed z-50 top-0 w-full bg-black text-white flex justify-between items-center px-6 py-3 font-manrope">
       {/* Contact Us - Hidden on mobile */}
       <div className="hidden md:flex text-sm xl:text-md items-center">
         <span className="mr-2">+</span> Contact Us
@@ -52,7 +52,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-12 left-0 w-full bg-[#4a0000] text-white flex flex-col items-center gap-10 py-8 shadow-lg">
+            className="absolute top-12 left-0 w-full bg-black text-white flex flex-col items-center gap-10 py-8 shadow-lg">
            
             {/* Navigation Items */}
             <div className="flex flex-col items-start gap-6">

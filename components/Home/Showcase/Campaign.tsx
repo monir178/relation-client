@@ -86,7 +86,7 @@ const Campaign = () => {
 
       {/* Content Section */}
       <motion.div 
-        className="bg-[#4a0000] w-full sm:w-1/2 flex justify-center items-center text-white px-4 sm:px-6 py-8 sm:py-0"
+        className="bg-black w-full sm:w-1/2 flex justify-center items-center text-white px-4 sm:px-6 py-8 sm:py-0"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={contentVariants}
