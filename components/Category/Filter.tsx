@@ -89,7 +89,7 @@ const Filter: React.FC<FilterProps> = ({
   );
 
   return (
-    <nav className="border-b border-gray-200  bg-white z-50">
+    <nav className="bg-white z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between min-h-16">
           {/* Breadcrumb - Always visible but responsive */}

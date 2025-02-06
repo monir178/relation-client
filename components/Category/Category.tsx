@@ -43,7 +43,7 @@ export default function Category() {
     <div className="container mx-auto px-4 py-20">
       <h1 className="text-3xl font-bold mb-8">Featured Collection</h1>
 
-      
+
 
       <Filter onCategoryChange={function (): void {
               throw new Error("Function not implemented.")
@@ -71,11 +71,11 @@ export default function Category() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-2 right-2 z-10 bg-white/80 backdrop-blur-sm hover:bg-white/90"
+                  className="absolute top-2 right-2 z-10 "
                   onClick={() => toggleFavorite(product.id)}
                 >
                   <Heart
-                    className={`h-5 w-5 ${favorites.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}`}
+                    className={`h-16 w-16 ${favorites.includes(product.id) ? "fill-red-800 text-red-500" : "text-gray-600"}`}
                   />
                   <span className="sr-only">Add to favorites</span>
                 </Button>
