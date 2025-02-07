@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Filter from "./Filter"
+import MessageModal from "../Payment/MassageModal"
 
 // Sample product data - in a real app this would come from an API or database
 const products = [
@@ -88,6 +89,7 @@ export default function Category() {
           </Card>
         ))}
       </div>
+      <MessageModal/>
     </div>
   )
 }
