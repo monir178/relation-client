@@ -67,7 +67,7 @@ export default function ProductCarousel() {
                   alt={product.name}
                   fill
                   priority={index === 0}
-                  className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-2xl"
+                  className="object-cover rounded-2xl"
                 />
               </div>
               <div className="space-y-2">

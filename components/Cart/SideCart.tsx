@@ -13,7 +13,7 @@ export function CartSidebar() {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetContent className="flex w-full flex-col sm:max-w-lg">
+      <SheetContent className="flex w-full flex-col sm:max-w-xl">
         <SheetHeader className="space-y-2.5 pr-6">
           <SheetTitle>Shopping Cart</SheetTitle>
         </SheetHeader>

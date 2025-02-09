@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CartProvider, useCart } from "./CartContext"
 import { CartSidebar } from "./SideCart"
 import MessageModal from "../Payment/MassageModal"
+import { RelatedProducts } from "../Product/RelatedProduct"
+
 
 function ProductContent() {
   const { addItem } = useCart()
@@ -166,12 +168,21 @@ function ProductContent() {
   )
 }
 
+
+// CartProductPages
 export default function CartProductPage() {
   return (
     <CartProvider>
+    
       <ProductContent />
-      <MessageModal/>
+      <MessageModal />
+      <div className="mt-16">
+        <h2 className="text-4xl font-semibold mb-6 text-center">You May Also Like</h2>
+        <RelatedProducts />
+      </div>
+      <CartSidebar />
     </CartProvider>
   )
 }
+
 
