@@ -87,6 +87,8 @@ const Navbar = () => {
     // Here you would typically handle the search, e.g., redirect to search results page
   };
   //
+  //
+  // check commit
   const UserMenu = () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
