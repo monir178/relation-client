@@ -1,86 +1,286 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Heart } from "lucide-react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Heart } from "lucide-react";
+import Link from "next/link";
+import { RelatedProducts } from "../Product/RelatedProduct";
+import Filter from "../Category/Filter";
 
-import MessageModal from "../Payment/MassageModal"
-
-// Sample product data - in a real app this would come from an API or database
-const product = [
-  { id: 1, name: "Burgundy Leather Loafer", price: "$295", imageUrl: "/bag.jpg", product: "Loafers" },
-  { id: 2, name: "Classic Black Loafer", price: "$275", imageUrl: "/bag.jpg", product: "Loafers" },
-  { id: 3, name: "Olive Penny Loafer", price: "$285", imageUrl: "/ts1.jpg", product: "Loafers" },
-  { id: 4, name: "Cream Canvas Sneaker", price: "$195", imageUrl: "/bag.jpg", product: "Sneakers" },
-  { id: 5, name: "Navy Blue Derby", price: "$310", imageUrl: "/bag.jpg", product: "Derby" },
-  { id: 6, name: "Brown Chelsea Boot", price: "$350", imageUrl: "/bag.jpg", product: "Boots" },
-  { id: 7, name: "Suede Desert Boot", price: "$275", imageUrl: "/ts1.jpg", product: "Boots" },
-  { id: 8, name: "Black Oxford Shoe", price: "$325", imageUrl: "/bag.jpg", product: "Oxford" },
-  { id: 9, name: "Tan Brogue Shoe", price: "$290", imageUrl: "/bag.jpg", product: "Brogue" },
-  { id: 10, name: "Gray Running Sneaker", price: "$180", imageUrl: "/bag.jpg", product: "Sneakers" },
-  { id: 11, name: "White Low-Top Sneaker", price: "$210", imageUrl: "/bag.jpg", product: "Sneakers" },
-  { id: 12, name: "Black High-Top Sneaker", price: "$230", imageUrl: "/bag.jpg", product: "Sneakers" },
-  { id: 13, name: "Beige Slip-On Loafer", price: "$265", imageUrl: "/bag.jpg", product: "Loafers" },
-  { id: 14, name: "Red Leather Moccasin", price: "$240", imageUrl: "/bag.jpg", product: "Moccasins" },
-  { id: 15, name: "Dark Green Hiking Boot", price: "$370", imageUrl: "/bag.jpg", product: "Boots" },
-  { id: 16, name: "Khaki Chukka Boot", price: "$310", imageUrl: "/bag.jpg", product: "Boots" },
-  { id: 17, name: "Blue Leather Slip-On", price: "$280", imageUrl: "/bag.jpg", product: "Slip-Ons" },
-  { id: 18, name: "Camel Suede Loafer", price: "$295", imageUrl: "/bag.jpg", product: "Loafers" },
-  { id: 19, name: "Black Monk Strap Shoe", price: "$320", imageUrl: "/bag.jpg", product: "Monk Straps" },
-  { id: 20, name: "White Espadrille", price: "$200", imageUrl: "/ts1.jpg", product: "Espadrilles" },
-]
+const products = [
+  {
+    id: 1,
+    name: "Jeans",
+    price: "$295",
+    imageUrl: "/bag.jpg",
+    category: "Jeans",
+  },
+  {
+    id: 2,
+    name: "Polo",
+    price: "$275",
+    imageUrl: "/bag.jpg",
+    category: "Polo",
+  },
+  {
+    id: 3,
+    name: "T-shirt",
+    price: "$285",
+    imageUrl: "/bag.jpg",
+    category: "T-shirt",
+  },
+  {
+    id: 4,
+    name: "Jersey",
+    price: "$195",
+    imageUrl: "/bag.jpg",
+    category: "Jersey",
+  },
+  {
+    id: 5,
+    name: "Hoodie",
+    price: "$320",
+    imageUrl: "/bag.jpg",
+    category: "Hoodie",
+  },
+  {
+    id: 6,
+    name: "Sweater",
+    price: "$250",
+    imageUrl: "/bag.jpg",
+    category: "Sweater",
+  },
+  {
+    id: 7,
+    name: "Joggers",
+    price: "$230",
+    imageUrl: "/bag.jpg",
+    category: "Joggers",
+  },
+  {
+    id: 8,
+    name: "Shorts",
+    price: "$180",
+    imageUrl: "/bag.jpg",
+    category: "Shorts",
+  },
+  {
+    id: 9,
+    name: "Cap",
+    price: "$90",
+    imageUrl: "/bag.jpg",
+    category: "Accessories",
+  },
+  {
+    id: 10,
+    name: "Sneakers",
+    price: "$350",
+    imageUrl: "/bag.jpg",
+    category: "Shoes",
+  },
+  {
+    id: 11,
+    name: "Backpack",
+    price: "$210",
+    imageUrl: "/bag.jpg",
+    category: "Accessories",
+  },
+  {
+    id: 12,
+    name: "Socks",
+    price: "$45",
+    imageUrl: "/bag.jpg",
+    category: "Accessories",
+  },
+  {
+    id: 13,
+    name: "Formal Shirt",
+    price: "$320",
+    imageUrl: "/bag.jpg",
+    category: "Shirt",
+  },
+  {
+    id: 14,
+    name: "Casual Shirt",
+    price: "$280",
+    imageUrl: "/bag.jpg",
+    category: "Shirt",
+  },
+  {
+    id: 15,
+    name: "Leather Jacket",
+    price: "$500",
+    imageUrl: "/bag.jpg",
+    category: "Jackets",
+  },
+  {
+    id: 16,
+    name: "Denim Jacket",
+    price: "$450",
+    imageUrl: "/bag.jpg",
+    category: "Jackets",
+  },
+  {
+    id: 17,
+    name: "Blazer",
+    price: "$600",
+    imageUrl: "/bag.jpg",
+    category: "Formal Wear",
+  },
+  {
+    id: 18,
+    name: "Tie",
+    price: "$55",
+    imageUrl: "/bag.jpg",
+    category: "Accessories",
+  },
+  {
+    id: 19,
+    name: "Suit",
+    price: "$900",
+    imageUrl: "/bag.jpg",
+    category: "Formal Wear",
+  },
+  {
+    id: 20,
+    name: "Trench Coat",
+    price: "$750",
+    imageUrl: "/bag.jpg",
+    category: "Outerwear",
+  },
+  {
+    id: 21,
+    name: "Scarf",
+    price: "$120",
+    imageUrl: "/bag.jpg",
+    category: "Accessories",
+  },
+  {
+    id: 22,
+    name: "Gloves",
+    price: "$80",
+    imageUrl: "/bag.jpg",
+    category: "Accessories",
+  },
+  {
+    id: 23,
+    name: "Sunglasses",
+    price: "$200",
+    imageUrl: "/bag.jpg",
+    category: "Accessories",
+  },
+  {
+    id: 24,
+    name: "Loafers",
+    price: "$300",
+    imageUrl: "/bag.jpg",
+    category: "Shoes",
+  },
+];
 
 export default function AllProducts() {
-  const [favorites, setFavorites] = useState<number[]>([])
-  const router = useRouter()
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams.get("category");
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [favorites, setFavorites] = useState<number[]>([]);
 
-  const toggleFavorite = (productId: number) => {
-    setFavorites((prev) => (prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]))
+  useEffect(() => {
+    if (selectedCategory) {
+      setFilteredProducts(
+        products.filter((p) => p.category === selectedCategory)
+      );
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [selectedCategory]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function setCategory(category: string): void {
+    throw new Error("Function not implemented.");
   }
 
-  const handleImageClick = (productId: number, product: string) => {
-    router.push(`/products/${productId}?product=${encodeURIComponent(product)}`)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function setLine(line: string): void {
+    throw new Error("Function not implemented.");
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function setSort(sort: string): void {
+    throw new Error("Function not implemented.");
   }
 
   return (
-    <div className="container mx-auto px-4 py-20">
-      <h1 className="text-3xl font-bold mb-8">Featured Products</h1>
+    <div>
+      <div className="container mx-auto px-4 py-24">
+        <h1 className="text-3xl font-bold mb-8 text-center">
+          {selectedCategory || "All Products"}
+        </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {product.map((product) => (
-          <Card key={product.id} className="group relative flex flex-col">
-            <CardContent className="p-0 flex-grow">
-              <div className="relative aspect-square overflow-hidden">
-                <Image
-                  src={product.imageUrl || "/placeholder.svg"}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  onClick={() => handleImageClick(product.id, product.product)}
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex justify-between items-center mb-1">
-                  <h3 className="font-medium text-lg">{product.name}</h3>
-                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toggleFavorite(product.id)}>
-                    <Heart
-                      className={`h-5 w-5 ${favorites.includes(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}`}
+        <Filter
+          onCategoryChange={setCategory}
+          onLineChange={setLine}
+          onSortChange={setSort}
+          selectedSort={""}
+        />
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredProducts.map((product) => (
+            <Card key={product.id} className="group">
+              <CardContent className="p-0">
+                <Link href={`/products/${product.id}`}>
+                  <div className="relative aspect-square overflow-hidden cursor-pointer">
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
                     />
-                    <span className="sr-only">Add to favorites</span>
-                  </Button>
+                  </div>
+                </Link>
+                <div className="p-4">
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-medium text-lg">{product.name}</h3>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() =>
+                        setFavorites((prevFavorites) =>
+                          prevFavorites.includes(product.id)
+                            ? prevFavorites.filter((id) => id !== product.id)
+                            : [...prevFavorites, product.id]
+                        )
+                      }
+                    >
+                      <Heart
+                        className={`h-5 w-5 transition-all duration-300 ${
+                          favorites.includes(product.id)
+                            ? "fill-red-500 text-red-500"
+                            : "text-gray-600"
+                        }`}
+                      />
+                    </Button>
+                  </div>
+                  <p className="text-gray-600">{product.price}</p>
                 </div>
-                <p className="text-gray-600">{product.price}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
-      <MessageModal />
-    </div>
-  )
-}
 
+      {/* Related products */}
+
+      {selectedCategory && (
+        <div className="mt-16">
+          <h2 className="text-4xl font-semibold mb-6 text-center">
+            You May Also Like
+          </h2>
+          <RelatedProducts />
+        </div>
+      )}
+    </div>
+  );
+}

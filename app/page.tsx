@@ -1,3 +1,5 @@
+
+import Category from "@/components/Category/Category";
 import Banner from "@/components/Home/Banner";
 import Campaign from "@/components/Home/Showcase/Campaign";
 import Carousel from "@/components/Home/Showcase/Carousel";
@@ -10,6 +12,7 @@ export default function Home() {
     <div className="">
       <Banner />
       <Carousel/>
+      <Category/>
       <NewArrivals/>
       <Campaign/>
       <Product/>

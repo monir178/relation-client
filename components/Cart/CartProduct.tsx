@@ -11,6 +11,7 @@ import { CartProvider, useCart } from "./CartContext"
 import { CartSidebar } from "./SideCart"
 import MessageModal from "../Payment/MassageModal"
 import { RelatedProducts } from "../Product/RelatedProduct"
+import { Carousel } from "../Product/ProductCausel"
 
 
 function ProductContent() {
@@ -51,14 +52,7 @@ function ProductContent() {
               <div className="absolute left-4 top-4 z-10">
                 <span className="rounded bg-red-500 px-2 py-1 text-sm font-semibold text-white">SALE</span>
               </div>
-              <Image
-                src="/bag.jpg"
-                alt="Premium Antibacterial Socks"
-                width={600}
-                height={600}
-                className="object-cover"
-                priority
-              />
+              <Carousel images={["/bag.jpg", "/bag.jpg", "/bag.jpg"]} />
             </div>
           </div>
 

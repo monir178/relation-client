@@ -14,11 +14,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useCart } from "../Cart/CartContext"
+import { CartSidebar } from "../Cart/SideCart"
+import { CartTable } from "@/components/Cart/CartTable"
+import { Button } from "@/components/ui/button"
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const searchRef = useRef<HTMLDivElement>(null)
+  const { items, setIsOpen } = useCart()
+  const [isCartTableVisible, setIsCartTableVisible] = useState(false)
 
   const contactInfo = [
     { icon: <Phone size={16} />, text: "+1 234 567 890" },
@@ -132,8 +138,15 @@ const Navbar = () => {
                     />
                   </div>
                 </form>
-                <div className="flex items-center gap-3 cursor-pointer">
-                  <ShoppingCart size={24} />
+                <div className="flex items-center gap-3 cursor-pointer" onClick={() => setIsCartTableVisible(true)}>
+                  <div className="relative">
+                    <ShoppingCart size={24} />
+                    {items.length > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground w-4 h-4 rounded-full text-xs flex items-center justify-center">
+                        {items.length}
+                      </span>
+                    )}
+                  </div>
                   <span>Cart</span>
                 </div>
                 {drawerLinks.map((link, index) => (
@@ -185,7 +198,14 @@ const Navbar = () => {
             )}
           </AnimatePresence>
         </div>
-        <ShoppingCart size={20} />
+        <div className="relative cursor-pointer" onClick={() => setIsCartTableVisible(true)}>
+          <ShoppingCart size={20} />
+          {items.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground w-4 h-4 rounded-full text-xs flex items-center justify-center">
+              {items.length}
+            </span>
+          )}
+        </div>
         <Sheet>
           <SheetTrigger asChild>
             <div className="flex items-center cursor-pointer">
@@ -207,6 +227,18 @@ const Navbar = () => {
           </SheetContent>
         </Sheet>
       </div>
+      <CartSidebar />
+      {isCartTableVisible && (
+        <Sheet open={isCartTableVisible} onOpenChange={setIsCartTableVisible}>
+          <SheetContent side="right" className="w-full max-w-md">
+            <SheetTitle>Shopping Cart</SheetTitle>
+            <CartTable />
+            <div className="mt-4 flex justify-end">
+              <Button onClick={() => setIsOpen(true)}>View Full Cart</Button>
+            </div>
+          </SheetContent>
+        </Sheet>
+      )}
     </div>
   )
 }

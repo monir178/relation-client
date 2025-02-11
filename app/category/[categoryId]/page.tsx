@@ -1,11 +1,12 @@
-import CategoryPages from '@/components/Category/CategoryPages';
+
+import CartProductPage from '@/components/Cart/CartProduct';
 import React from 'react';
 
 
 const Category = () => {
     return (
         <div>
-            <CategoryPages/>
+            <CartProductPage/>
         </div>
     );
 };

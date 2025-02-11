@@ -37,9 +37,9 @@ export default function RootLayout({
         className={`${geistSans.variable,  manrope.variable} ${geistMono.variable} antialiased`}>
         <CartProvider>
         <Navbar />
-        </CartProvider>
         {children}
         <Footer/>
+        </CartProvider>
       </body>
     </html>
   );
